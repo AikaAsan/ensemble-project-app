@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
 import MovieList from './components/MovieList';
 import SearchInput from './components/SearchInput';
 import ReactPaginate from 'react-paginate';
@@ -8,15 +7,11 @@ import Header from './components/Header';
 function App() {
     const [movies, setMovies] = useState([]);
     const [searchValue, setSearchValue] = useState('');
-
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-
     const [pages, setPages] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
-    console.log('movies:', movies);
-    console.log('total pages:', totalPages);
     const fetchMoviesHandler = async (searchValue, pages) => {
         setIsLoading(true);
         setError(null);
@@ -36,8 +31,6 @@ function App() {
                 setTotalPages(Math.ceil(data.totalResults / 10));
                 setPages(page);
             }
-
-            console.log('data:', data);
         } catch (error) {
             setError(error.message);
         }
@@ -49,14 +42,14 @@ function App() {
     };
 
     const PageClickHandler = (e) => {
-        console.log(e.selected);
         fetchMoviesHandler(searchValue, e.selected + 1);
     };
+
     useEffect(() => {
         fetchMoviesHandler(searchValue);
     }, [searchValue, pages]);
 
-    let content = <p>Start typing to find a movie </p>;
+    let content = <p>Start typing to find a movie</p>;
 
     if (error) {
         content = <p>{error}</p>;

@@ -21,7 +21,6 @@ function SearchInput(props) {
                         sm:text-3xl'
                         placeholder='Search for a movie'
                         type='search'
-                        // value={props.value}
                         onChange={props.onChange}
                     />
                 </div>
